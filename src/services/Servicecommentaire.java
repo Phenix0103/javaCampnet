@@ -5,7 +5,7 @@
  */
 package services;
 
-import entities.evenement;
+
 
 import tools.Connexion;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import entities.evenement;
+import entities.commentaire;
 import utils.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,59 +32,57 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author POSTE HP
+ * @author sarra
  */
-public class evenementservice {
+public class Servicecommentaire {
 
     Connection cnx;
 
-    public evenementservice() {
+    public Servicecommentaire() {
         Connexion instance = Connexion.getInstance();
 
     }
 
-    public void CreateEvent(evenement e) {
+    public void Createcommentaire(commentaire cmt) {
         try {
-            String req = "INSERT INTO evenement(nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getNom() + "'" + ",'" + e.getPhoto() + "','" + e.getDescription() + "'" + ",'" + e.getLieu() + "','" + e.getPrix() + "')";
+            String req = "INSERT INTO commentaire(Description) VALUES "
+                    + "('" + cmt.getDescription() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("commentaire ajouté avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public void AjoutEvenement(evenement e) {
+    public void Ajoutcommentaire(commentaire cmt) {
         try {
-            String req = "INSERT INTO evenement(id,nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getId() + "','" + e.getNom() + "','" + e.getPhoto() + "','" + e.getDescription() + "','" + e.getLieu() + "','" + e.getPrix() + "')";
+            String req = "INSERT INTO commentaire(id,Description) VALUES "
+                    + "('" + cmt.getid() + "','" + cmt.getDescription() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("commentaire ajoutée avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public List<evenement> Readevent() {
-        List<evenement> plist = new ArrayList<>();
+    public List<commentaire> Readcommentaire() {
+        List<commentaire> plist = new ArrayList<>();
         try {
-            String req = "select * from evenement";
+            String req = "select * from commentaire";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt("id"));
-                e.setNom(rs.getString(2));
-                e.setPhoto(rs.getString(3));
-                e.setDescription(rs.getString(4));
-                e.setLieu(rs.getString(5));
-                e.setPrix(rs.getDouble(6));
-
-                plist.add(e);
+                commentaire cmt = new commentaire();
+                cmt.setid(rs.getInt("id"));
+                
+               
+                cmt.setDescription(rs.getString(2));
+               
+                plist.add(cmt);
             }
-        } catch (Exception e) {
+        } catch (Exception cmt) {
         }
         return plist;
     }
@@ -113,52 +111,49 @@ public class evenementservice {
         }       
     }
      */
-    public List<evenement> afficherEvenement() throws SQLException {
-        List<evenement> resulta = new ArrayList<>();
+    public List<commentaire> affichercommentaire() throws SQLException {
+        List<commentaire> resulta = new ArrayList<>();
 
         Statement stm = cnx.createStatement();
-        String query = "select * from evenement ";
+        String query = "select * from commentaire ";
 
         ResultSet resultat = stm.executeQuery(query);
-        evenement e = new evenement();
+        commentaire cmt = new commentaire();
         while (resultat.next()) {
-            e.setId(resultat.getInt("id"));
-            e.setNom(resultat.getString("nom"));
-            e.setLieu(resultat.getString("photo"));
-            e.setDescription(resultat.getString("description"));
-            e.setLieu(resultat.getString("lieu"));
-            e.setPrix(resultat.getDouble("prix"));
+            cmt.setid(resultat.getInt("id"));
+            
+            
+            cmt.setDescription(resultat.getString("description"));
+            
 
-            resulta.add(e);
+            resulta.add(cmt);
         }
 
         return resulta;
     }
 
-    public void supprimerevent(evenement e) {
-        String req = "delete from evenement where id=?";
+    public void supprimercommentaire(commentaire cmt) {
+        String req = "delete from commentaire where id=?";
 
         try {
             PreparedStatement stm = DataSource.getInstance().getCnx().prepareStatement(req);
-            stm.setInt(1, e.getId());
+            stm.setInt(1, cmt.getid());
             int i = stm.executeUpdate();
-            System.out.println(i + " Evenement suprimé");
+            System.out.println(i + " commentaire supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void modifier(int id, evenement e) {
-        String updateStatement = "UPDATE evenement SET Nom= ? ,photo=?, description=?, lieu=?, prix=? WHERE id= ? ";
+    public void modifiercommentaire(int id, commentaire cmt) {
+        String updateStatement = "UPDATE commentaire SET description=? WHERE id= ? ";
 
         try {
             PreparedStatement pre = DataSource.getInstance().getCnx().prepareStatement(updateStatement);
-            pre.setString(1, e.getNom());
-            pre.setString(2, e.getPhoto());
-            pre.setString(3, e.getDescription());
-            pre.setString(4, e.getLieu());
-            pre.setDouble(5, e.getPrix());
-            pre.setInt(6, id);
+        
+            pre.setString(1, cmt.getDescription());
+            
+            pre.setInt(2, id);
             pre.executeUpdate();
             System.out.println("Record Update successfully from database.:!!: ");
         } catch (SQLException m) {
@@ -233,23 +228,22 @@ public class evenementservice {
 
     }*/
 
-    public List<evenement> getAll() {
-        ObservableList<evenement> myList = FXCollections.observableArrayList();
+    public List<commentaire> getAll() {
+        ObservableList<commentaire> myList = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT * FROM event";
+            String requete = "SELECT * FROM commentaire";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt(1));
-                e.setNom(rs.getString("nom"));
-                e.setPhoto(rs.getString("photo"));
-                e.setDescription(rs.getString("description"));
-                e.setLieu(rs.getString("lieu"));
-                e.setPrix(rs.getDouble("prix"));
+                commentaire cmt = new commentaire();
+                cmt.setid(rs.getInt(1));
+               
+                cmt.setDescription(rs.getString("Description"));
+              
+               
 
-                myList.add(e);
+                myList.add(cmt);
 
             }
         } catch (SQLException ex) {
@@ -260,24 +254,22 @@ public class evenementservice {
 
     }
 
-    public ObservableList<evenement> read() throws SQLException {
-        ObservableList<evenement> L = FXCollections.observableArrayList();
+    public ObservableList<commentaire> readcommentaire() throws SQLException {
+        ObservableList<commentaire> L = FXCollections.observableArrayList();
 
         Statement st = cnx.createStatement();
-        String req = "select * from event";
+        String req = "select * from commentaire";
         ResultSet rs = st.executeQuery(req);
 
         while (rs.next()) {
             int id = rs.getInt(1);
-            String nom = rs.getString("nom");
-            String photo = rs.getString("photo");
-            String description = rs.getString("description");
-            String lieu = rs.getString("lieu");
-            Double prix = rs.getDouble("prix");
+            
+            String Description = rs.getString("Description");
+            
 
-            evenement e = new evenement(id, nom, photo, description, lieu, prix);
+           commentaire cmt = new commentaire(id, Description);
 
-            L.add(e);
+            L.add(cmt);
         }
 
         return L;

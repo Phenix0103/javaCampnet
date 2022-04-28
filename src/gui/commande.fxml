@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CommandeController">
+   <children>
+      <TextField fx:id="ProduitTF" layoutX="136.0" layoutY="139.0" />
+      <TextField fx:id="quantiteTF" layoutX="136.0" layoutY="187.0" />
+      <TextField fx:id="TotalTF" layoutX="136.0" layoutY="231.0" />
+      <Label layoutX="68.0" layoutY="143.0" text="Produit" />
+      <Label layoutX="65.0" layoutY="191.0" text="Quantite" />
+      <Label layoutX="75.0" layoutY="235.0" text="Total" />
+      <Label layoutX="76.0" layoutY="280.0" text="Date" />
+      <DatePicker fx:id="datepicker" layoutX="123.0" layoutY="276.0" />
+      <Button fx:id="btnajoutC" layoutX="363.0" layoutY="88.0" mnemonicParsing="false" onAction="#AjoutCom" text="Ajouter Commande" />
+      <TextField fx:id="idadressTF" layoutX="136.0" layoutY="95.0" />
+      <TextField fx:id="idlivTF" layoutX="136.0" layoutY="50.0" />
+      <Label layoutX="69.0" layoutY="54.0" text="ID Livreur" />
+      <Label layoutX="69.0" layoutY="99.0" text="ID Acresse" />
+   </children>
+</AnchorPane>

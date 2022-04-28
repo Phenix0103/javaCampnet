@@ -5,7 +5,7 @@
  */
 package services;
 
-import entities.evenement;
+
 
 import tools.Connexion;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import entities.evenement;
+import entities.categorie;
 import utils.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,59 +32,57 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author POSTE HP
+ * @author sarra
  */
-public class evenementservice {
+public class Servicecategorie {
 
     Connection cnx;
 
-    public evenementservice() {
+    public Servicecategorie() {
         Connexion instance = Connexion.getInstance();
 
     }
 
-    public void CreateEvent(evenement e) {
+    public void Createcategorie(categorie cat) {
         try {
-            String req = "INSERT INTO evenement(nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getNom() + "'" + ",'" + e.getPhoto() + "','" + e.getDescription() + "'" + ",'" + e.getLieu() + "','" + e.getPrix() + "')";
+            String req = "INSERT INTO categorie(theme,description) VALUES "
+                    + "('" + cat.gettheme() + "'" + cat.getdescription() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("categorie ajoutée avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public void AjoutEvenement(evenement e) {
+    public void Ajoutcategorie(categorie cat) {
         try {
-            String req = "INSERT INTO evenement(id,nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getId() + "','" + e.getNom() + "','" + e.getPhoto() + "','" + e.getDescription() + "','" + e.getLieu() + "','" + e.getPrix() + "')";
+            String req = "INSERT INTO categorie(id,theme,description) VALUES "
+                    + "('" + cat.getid() + "','" + cat.gettheme() + "','" + cat.getdescription() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("categorie ajoutée avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public List<evenement> Readevent() {
-        List<evenement> plist = new ArrayList<>();
+    public List<categorie> Readcategorie() {
+        List<categorie> plist = new ArrayList<>();
         try {
-            String req = "select * from evenement";
+            String req = "select * from categorie";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt("id"));
-                e.setNom(rs.getString(2));
-                e.setPhoto(rs.getString(3));
-                e.setDescription(rs.getString(4));
-                e.setLieu(rs.getString(5));
-                e.setPrix(rs.getDouble(6));
-
-                plist.add(e);
+                categorie cat = new categorie();
+                cat.setid(rs.getInt("id"));
+                cat.settheme(rs.getString(2));
+               
+                cat.setdescription(rs.getString(3));
+               
+                plist.add(cat);
             }
-        } catch (Exception e) {
+        } catch (Exception cat) {
         }
         return plist;
     }
@@ -113,52 +111,49 @@ public class evenementservice {
         }       
     }
      */
-    public List<evenement> afficherEvenement() throws SQLException {
-        List<evenement> resulta = new ArrayList<>();
+    public List<categorie> affichercategorie() throws SQLException {
+        List<categorie> resulta = new ArrayList<>();
 
         Statement stm = cnx.createStatement();
-        String query = "select * from evenement ";
+        String query = "select * from categorie ";
 
         ResultSet resultat = stm.executeQuery(query);
-        evenement e = new evenement();
+        categorie cat = new categorie();
         while (resultat.next()) {
-            e.setId(resultat.getInt("id"));
-            e.setNom(resultat.getString("nom"));
-            e.setLieu(resultat.getString("photo"));
-            e.setDescription(resultat.getString("description"));
-            e.setLieu(resultat.getString("lieu"));
-            e.setPrix(resultat.getDouble("prix"));
+            cat.setid(resultat.getInt("id"));
+            cat.settheme(resultat.getString("theme"));
+            
+            cat.setdescription(resultat.getString("description"));
+            
 
-            resulta.add(e);
+            resulta.add(cat);
         }
 
         return resulta;
     }
 
-    public void supprimerevent(evenement e) {
-        String req = "delete from evenement where id=?";
+    public void supprimercategorie(categorie cat) {
+        String req = "delete from categorie where id=?";
 
         try {
             PreparedStatement stm = DataSource.getInstance().getCnx().prepareStatement(req);
-            stm.setInt(1, e.getId());
+            stm.setInt(1, cat.getid());
             int i = stm.executeUpdate();
-            System.out.println(i + " Evenement suprimé");
+            System.out.println(i + " categorie supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void modifier(int id, evenement e) {
-        String updateStatement = "UPDATE evenement SET Nom= ? ,photo=?, description=?, lieu=?, prix=? WHERE id= ? ";
+    public void modifier(int id, categorie cat) {
+        String updateStatement = "UPDATE categorie SET theme= ? ,description=? WHERE id= ? ";
 
         try {
             PreparedStatement pre = DataSource.getInstance().getCnx().prepareStatement(updateStatement);
-            pre.setString(1, e.getNom());
-            pre.setString(2, e.getPhoto());
-            pre.setString(3, e.getDescription());
-            pre.setString(4, e.getLieu());
-            pre.setDouble(5, e.getPrix());
-            pre.setInt(6, id);
+            pre.setString(1, cat.gettheme());
+            pre.setString(2, cat.getdescription());
+            
+            pre.setInt(3, id);
             pre.executeUpdate();
             System.out.println("Record Update successfully from database.:!!: ");
         } catch (SQLException m) {
@@ -233,23 +228,22 @@ public class evenementservice {
 
     }*/
 
-    public List<evenement> getAll() {
-        ObservableList<evenement> myList = FXCollections.observableArrayList();
+    public List<categorie> getAll() {
+        ObservableList<categorie> myList = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT * FROM event";
+            String requete = "SELECT * FROM reclamation";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt(1));
-                e.setNom(rs.getString("nom"));
-                e.setPhoto(rs.getString("photo"));
-                e.setDescription(rs.getString("description"));
-                e.setLieu(rs.getString("lieu"));
-                e.setPrix(rs.getDouble("prix"));
+                categorie cat = new categorie();
+                cat.setid(rs.getInt(1));
+               cat.settheme(rs.getString("theme"));
+                cat.setdescription(rs.getString("description"));
+              
+               
 
-                myList.add(e);
+                myList.add(cat);
 
             }
         } catch (SQLException ex) {
@@ -260,24 +254,22 @@ public class evenementservice {
 
     }
 
-    public ObservableList<evenement> read() throws SQLException {
-        ObservableList<evenement> L = FXCollections.observableArrayList();
+    public ObservableList<categorie> read() throws SQLException {
+        ObservableList<categorie> L = FXCollections.observableArrayList();
 
         Statement st = cnx.createStatement();
-        String req = "select * from event";
+        String req = "select * from categorie";
         ResultSet rs = st.executeQuery(req);
 
         while (rs.next()) {
             int id = rs.getInt(1);
-            String nom = rs.getString("nom");
-            String photo = rs.getString("photo");
+            String theme = rs.getString("theme");
             String description = rs.getString("description");
-            String lieu = rs.getString("lieu");
-            Double prix = rs.getDouble("prix");
+            
 
-            evenement e = new evenement(id, nom, photo, description, lieu, prix);
+           categorie cat = new categorie(id, theme, description);
 
-            L.add(e);
+            L.add(cat);
         }
 
         return L;

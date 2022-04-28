@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class DataSource {
     
-    private String URL="jdbc:mysql://localhost:3306/campne";
+    private String URL="jdbc:mysql://localhost:3306/campnet";
     private String login="root";
     private String pwd="";
     Connection cnx;

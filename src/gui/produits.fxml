@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="filsP" prefHeight="696.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProduitsController">
+   <children>
+      <AnchorPane layoutY="1.0" prefHeight="696.0" prefWidth="903.0" style="-fx-background-color: #f8ebb8;">
+         <children>
+            <Button fx:id="modif" layoutX="732.0" layoutY="168.0" mnemonicParsing="false" onAction="#btn_modifier" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #24370e;" text="Modifier" textFill="WHITE" />
+            <TableView fx:id="tabProd" layoutX="21.0" layoutY="439.0" prefHeight="174.0" prefWidth="514.0" style="-fx-background-color: #24370e;">
+              <columns>
+                <TableColumn fx:id="col_idp" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="col_nomp" prefWidth="75.0" text="Nom" />
+                  <TableColumn fx:id="col_phop" prefWidth="75.0" text="Photo" />
+                  <TableColumn fx:id="col_des" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="col_dispop" prefWidth="120.800048828125" text="Disponibilite" />
+                  <TableColumn fx:id="col_prixp" prefWidth="87.20001831054685" text="Prix" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnajoutqtpn" layoutX="682.0" layoutY="452.0" mnemonicParsing="false" onAction="#Create_An_Order_Line" prefHeight="26.0" prefWidth="143.0" style="-fx-background-color: #24370e;" text="Ajouter Au Panier" textFill="WHITE" />
+            <Button fx:id="btnajoutP" layoutX="187.0" layoutY="348.0" mnemonicParsing="false" onAction="#AjoutProduit" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #24370e;" text="Ajouter" textFill="WHITE" />
+            <Button fx:id="pdf" layoutX="425.0" layoutY="635.0" mnemonicParsing="false" onAction="#extPDF" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #24370e;" text="Imprimer" textFill="WHITE" />
+            <Button fx:id="actualiseP" layoutX="647.0" layoutY="654.0" mnemonicParsing="false" onAction="#refreshP" prefHeight="30.0" prefWidth="122.0" style="-fx-background-color: #24370e;" text="Actualiser" textFill="WHITE" />
+            <Button fx:id="suppP" layoutX="552.0" layoutY="452.0" mnemonicParsing="false" onAction="#btn_SupprP" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #24370e;" text="Supprimer" textFill="WHITE" />
+            <TextField fx:id="PrixTF" layoutX="264.0" layoutY="260.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #24370e;" />
+            <Label layoutX="499.0" layoutY="172.0" text="ID:">
+               <font>
+                  <Font name="Britannic Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="idmodif" layoutX="535.0" layoutY="168.0" style="-fx-border-color: #24370e;" />
+            <Button fx:id="btnquitterpn" layoutX="782.0" layoutY="652.0" mnemonicParsing="false" onAction="#Quitterpanier" prefHeight="30.0" prefWidth="102.0" style="-fx-background-color: #24370e;" text="Quitter" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <TextField fx:id="nomTF" layoutX="261.0" layoutY="33.0" style="-fx-border-color: #24370e;" />
+      <TextField fx:id="PhotoTF" layoutX="262.0" layoutY="87.0" style="-fx-border-color: #24370e;" />
+      <TextField fx:id="DescTF" layoutX="263.0" layoutY="144.0" style="-fx-border-color: #24370e;" />
+      <Label layoutX="77.0" layoutY="37.0" text="Nom">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="77.0" layoutY="91.0" prefHeight="18.0" prefWidth="62.0" text="Photo">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="77.0" layoutY="148.0" text="Description">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="77.0" layoutY="204.0" text="Disponibilite">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="77.0" layoutY="264.0" text="Prix">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+      <ComboBox fx:id="dispocombo" layoutX="268.0" layoutY="200.0" prefHeight="26.0" prefWidth="143.0" style="-fx-border-color: #24370e;" />
+   </children>
+</AnchorPane>

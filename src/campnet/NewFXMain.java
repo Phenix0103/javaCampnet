@@ -5,28 +5,33 @@
  */
 package campnet;
 
+import java.io.File;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import services.evenementservice;
 
 /**
  *
- * @author POSTE HP
+ * @author ASUS
  */
-public class NewFXMain extends Application {
-    
+public class NewFXMain extends Application{
 
-     @Override
+    /**
+     * @param args the command line arguments
+     */
+    @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLeventadd.fxml"));
+        
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/livreur.fxml"));
+      /*   String path="C:\\xampp\\htdocs\\hotelchambre\\bienvenue.mp3";
+            Media media =new Media(new File(path).toURI().toString());
+            MediaPlayer mediaplayer = new MediaPlayer(media);
+            mediaplayer.play();*/
         
         Scene scene = new Scene(root);
         
@@ -39,6 +44,6 @@ public class NewFXMain extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-     //   Connexion cnx = Connexion.getInstance();
     }
+    
 }

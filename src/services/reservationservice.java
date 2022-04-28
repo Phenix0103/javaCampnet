@@ -5,8 +5,10 @@
  */
 package services;
 
+import entities.evenement;
 import entities.reservation;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tools.Connexion;
 import utils.DataSource;
-import java.sql.Date;
 
 /**
  *
@@ -26,7 +28,7 @@ import java.sql.Date;
     Connection cnx;
 
     public reservationservice() {
-        DataSource instance = DataSource.getInstance();
+        Connexion instance = Connexion.getInstance();
 
     }
 
@@ -44,7 +46,7 @@ import java.sql.Date;
 
     public void Ajoutres(reservation r) {
         try {
-            String req = "INSERT INTO reservation(id,nbr_pers,date,date_r,evenement_id) VALUES "
+            String req = "INSERT INTO reservation(nbr_pers,date,date_r,evenement_id,Evenement_id) VALUES "
                     + "('" + r.getId() + "','" + r.getNbr_pers() + "'" + ",'" + r.getDate() + "','" + r.getDate_r() + "'" + ",'" + r.getEvenement_id() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
@@ -112,7 +114,7 @@ import java.sql.Date;
             r.setNbr_pers(resultat.getInt("nbr_pers"));
             r.setDate(resultat.getDate("date"));
             r.setDate_r(resultat.getDate("date_r"));
-            r.setEvenement_id(resultat.getInt("evenement_id"));
+            r.setEvenement_id(resultat.getInt("Evenement_id"));
 
             resulta.add(r);
         }
@@ -134,7 +136,7 @@ import java.sql.Date;
     }
 
     public void modifier(int id, reservation r) {
-        String updateStatement = "UPDATE reservation SET Nbr_pers= ? ,date=?, date_r=?, evenement_id=? WHERE id= ? ";
+        String updateStatement = "UPDATE reservation SET Nbr_pers= ? ,date=?, date_r=?, Evenement_id=? WHERE id= ? ";
 
         try {
             PreparedStatement pre = DataSource.getInstance().getCnx().prepareStatement(updateStatement);
@@ -142,7 +144,7 @@ import java.sql.Date;
             pre.setDate(2, r.getDate());
             pre.setDate(3, r.getDate_r());
             pre.setInt(4, r.getEvenement_id());
-            pre.setInt(6, id);
+            pre.setInt(5, id);
             pre.executeUpdate();
             System.out.println("Record Update successfully from database.:!!: ");
         } catch (SQLException m) {
@@ -217,11 +219,11 @@ import java.sql.Date;
 
     }*/
 
-  /*  public List<reservation> getAll() {
+    public List<reservation> getAll() {
         ObservableList<reservation> myList = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT * FROM reservation";
+            String requete = "SELECT * FROM evenement";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
@@ -230,7 +232,7 @@ import java.sql.Date;
                 r.setNbr_pers(rs.getInt("nbr_pers"));
                 r.setDate(rs.getDate("date"));
                 r.setDate_r(rs.getDate("date_r"));
-                r.setEvenement_id(rs.getInt("evenement_id"));
+                r.setEvenement_id(rs.getInt("Evenement_id"));
 
                 myList.add(r);
 
@@ -242,7 +244,7 @@ import java.sql.Date;
         return myList;
 
     }
-*/
+
     public ObservableList<reservation> read() throws SQLException {
         ObservableList<reservation> L = FXCollections.observableArrayList();
 
@@ -255,9 +257,9 @@ import java.sql.Date;
             int nbr_pers = rs.getInt("nbr_pers");
             Date date = rs.getDate("date");
             Date date_r = rs.getDate("date_r");
-            int evenement_id = rs.getInt("evenement_id");
+            int Evenement_id = rs.getInt("Evenement_id");
 
-            reservation r = new reservation(id, nbr_pers, date, date_r, evenement_id);
+            reservation r = new reservation(id, nbr_pers, date, date_r, Evenement_id);
 
             L.add(r);
         }

@@ -5,7 +5,7 @@
  */
 package services;
 
-import entities.evenement;
+
 
 import tools.Connexion;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import entities.evenement;
+import entities.adresse;
 import utils.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,59 +32,61 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author POSTE HP
+ * @author sarra
  */
-public class evenementservice {
+public class Serviceadresse {
 
     Connection cnx;
 
-    public evenementservice() {
+    public Serviceadresse() {
         Connexion instance = Connexion.getInstance();
 
     }
 
-    public void CreateEvent(evenement e) {
+    public void Createadresse( adresse Ad) {
         try {
-            String req = "INSERT INTO evenement(nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getNom() + "'" + ",'" + e.getPhoto() + "','" + e.getDescription() + "'" + ",'" + e.getLieu() + "','" + e.getPrix() + "')";
-            Statement st = DataSource.getInstance().getCnx().createStatement();
+            String req = "INSERT INTO adresse(Nom,Prenom,Adress,City,Email,Tel) VALUES "
+                    + "('" + Ad.getNom() + "','" + Ad.getPrenom() + "','" + Ad.getAdress() + "','" + Ad.getCity() + "','" + Ad.getEmail() + "','" + Ad.getTel() + "')";
+            Statement st = DataSource.getInstance().getCnx().createStatement();  
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("Adresse ajoutée avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public void AjoutEvenement(evenement e) {
+    public void Ajoutadresse(adresse Ad) {
         try {
-            String req = "INSERT INTO evenement(id,nom,photo,description,lieu,prix) VALUES "
-                    + "('" + e.getId() + "','" + e.getNom() + "','" + e.getPhoto() + "','" + e.getDescription() + "','" + e.getLieu() + "','" + e.getPrix() + "')";
+            String req = "INSERT INTO adresse(Nom,Prenom,Adress,City,Email,Tel) VALUES "
+                     + "('" + Ad.getNom() + "','" + Ad.getPrenom() + "','" + Ad.getAdress() + "','" + Ad.getCity() + "','" + Ad.getEmail() + "','" + Ad.getTel() + "')";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             st.executeUpdate(req);
-            System.out.println("evenement ajouté avec succès");
+            System.out.println("Adresse ajoutée avec succès");
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
 
-    public List<evenement> Readevent() {
-        List<evenement> plist = new ArrayList<>();
+    public List<adresse> Readadresse() {
+        List<adresse> plist = new ArrayList<>();
         try {
-            String req = "select * from evenement";
+            String req = "select * from adresse";
             Statement st = DataSource.getInstance().getCnx().createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt("id"));
-                e.setNom(rs.getString(2));
-                e.setPhoto(rs.getString(3));
-                e.setDescription(rs.getString(4));
-                e.setLieu(rs.getString(5));
-                e.setPrix(rs.getDouble(6));
-
-                plist.add(e);
+                adresse Ad = new adresse();
+                Ad.setId(rs.getInt("id"));
+                Ad.setNom(rs.getString(2));
+                Ad.setPrenom(rs.getString(2));
+                Ad.setAdress(rs.getString(3));
+                Ad.setCity(rs.getString(4));
+                Ad.setEmail(rs.getString(5));
+                Ad.setTel(rs.getInt("Tel"));
+                
+               
+                plist.add(Ad);
             }
-        } catch (Exception e) {
+        } catch (Exception Ad) {
         }
         return plist;
     }
@@ -113,52 +115,55 @@ public class evenementservice {
         }       
     }
      */
-    public List<evenement> afficherEvenement() throws SQLException {
-        List<evenement> resulta = new ArrayList<>();
+    public List<adresse> afficheradresse() throws SQLException {
+        List<adresse> resulta = new ArrayList<>();
 
         Statement stm = cnx.createStatement();
-        String query = "select * from evenement ";
+        String query = "select * from adresse ";
 
         ResultSet resultat = stm.executeQuery(query);
-        evenement e = new evenement();
+        adresse Ad = new adresse();
         while (resultat.next()) {
-            e.setId(resultat.getInt("id"));
-            e.setNom(resultat.getString("nom"));
-            e.setLieu(resultat.getString("photo"));
-            e.setDescription(resultat.getString("description"));
-            e.setLieu(resultat.getString("lieu"));
-            e.setPrix(resultat.getDouble("prix"));
+            Ad.setId(resultat.getInt("id"));
+            Ad.setNom(resultat.getString("Nom"));
+            Ad.setPrenom(resultat.getString("Prenom"));
+            Ad.setAdress(resultat.getString("Adress"));
+            Ad.setCity(resultat.getString("City"));
+            Ad.setEmail(resultat.getString("Email"));
+            Ad.setTel(resultat.getInt("Tel"));
+            
 
-            resulta.add(e);
+            resulta.add(Ad);
         }
 
         return resulta;
     }
 
-    public void supprimerevent(evenement e) {
-        String req = "delete from evenement where id=?";
+    public void supprimeradresse(adresse Ad) {
+        String req = "delete from adresse where id=?";
 
         try {
             PreparedStatement stm = DataSource.getInstance().getCnx().prepareStatement(req);
-            stm.setInt(1, e.getId());
+            stm.setInt(1, Ad.getId());
             int i = stm.executeUpdate();
-            System.out.println(i + " Evenement suprimé");
+            System.out.println(i + " adresse supprimée");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
 
-    public void modifier(int id, evenement e) {
-        String updateStatement = "UPDATE evenement SET Nom= ? ,photo=?, description=?, lieu=?, prix=? WHERE id= ? ";
+    public void modifier(int id, adresse Ad) {
+        String updateStatement = "UPDATE adresse SET Nom= ? ,Prenom=? ,Adress=? ,City=? , Email=? , Tel=? WHERE id= ? ";
 
         try {
             PreparedStatement pre = DataSource.getInstance().getCnx().prepareStatement(updateStatement);
-            pre.setString(1, e.getNom());
-            pre.setString(2, e.getPhoto());
-            pre.setString(3, e.getDescription());
-            pre.setString(4, e.getLieu());
-            pre.setDouble(5, e.getPrix());
-            pre.setInt(6, id);
+            pre.setString(1, Ad.getNom());
+            pre.setString(2, Ad.getPrenom());
+            pre.setString(3, Ad.getAdress());
+            pre.setString(4, Ad.getCity());
+            pre.setString(5, Ad.getEmail());
+            pre.setInt(6, Ad.getTel());
+            pre.setInt(7, id);
             pre.executeUpdate();
             System.out.println("Record Update successfully from database.:!!: ");
         } catch (SQLException m) {
@@ -233,23 +238,26 @@ public class evenementservice {
 
     }*/
 
-    public List<evenement> getAll() {
-        ObservableList<evenement> myList = FXCollections.observableArrayList();
+    public List<adresse> getAll() {
+        ObservableList<adresse> myList = FXCollections.observableArrayList();
 
         try {
-            String requete = "SELECT * FROM event";
+            String requete = "SELECT * FROM adresse";
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                evenement e = new evenement();
-                e.setId(rs.getInt(1));
-                e.setNom(rs.getString("nom"));
-                e.setPhoto(rs.getString("photo"));
-                e.setDescription(rs.getString("description"));
-                e.setLieu(rs.getString("lieu"));
-                e.setPrix(rs.getDouble("prix"));
+                adresse Ad = new adresse();
+                Ad.setId(rs.getInt(1));
+               Ad.setNom(rs.getString("Nom"));
+                Ad.setPrenom(rs.getString("Prenom"));
+                Ad.setAdress(rs.getString("Adress"));
+                Ad.setCity(rs.getString("City"));
+                 Ad.setEmail(rs.getString("Email"));
+                Ad.setTel(rs.getInt("Tel"));
+               
+               
 
-                myList.add(e);
+                myList.add(Ad);
 
             }
         } catch (SQLException ex) {
@@ -260,24 +268,27 @@ public class evenementservice {
 
     }
 
-    public ObservableList<evenement> read() throws SQLException {
-        ObservableList<evenement> L = FXCollections.observableArrayList();
+    public ObservableList<adresse> read() throws SQLException {
+        ObservableList<adresse> L = FXCollections.observableArrayList();
 
         Statement st = cnx.createStatement();
-        String req = "select * from event";
+        String req = "select * from adresse";
         ResultSet rs = st.executeQuery(req);
 
         while (rs.next()) {
             int id = rs.getInt(1);
-            String nom = rs.getString("nom");
-            String photo = rs.getString("photo");
-            String description = rs.getString("description");
-            String lieu = rs.getString("lieu");
-            Double prix = rs.getDouble("prix");
+            String Nom = rs.getString("Nom");
+            String Prenom = rs.getString("Prenom");
+            String Adress = rs.getString("Adress");
+            String City = rs.getString("City");
+            String Email = rs.getString("Email");
+            int Tel = rs.getInt("Tel");
+            
+            
 
-            evenement e = new evenement(id, nom, photo, description, lieu, prix);
+            adresse Ad = new adresse(id, Nom, Prenom, Adress, City, Email, Tel);
 
-            L.add(e);
+            L.add(Ad);
         }
 
         return L;

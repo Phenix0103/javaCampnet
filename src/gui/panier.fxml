@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="filsPn" prefHeight="564.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PanierController">
+   <children>
+      <AnchorPane layoutX="-1.0" prefHeight="565.0" prefWidth="763.0" style="-fx-background-color: #f8ebb8;">
+         <children>
+           
+            <TextField fx:id="tf_qte" layoutX="135.0" layoutY="108.0" prefHeight="26.0" prefWidth="128.0" style="-fx-border-color: #24370e;" />
+            <TableView fx:id="tabPn" layoutX="38.0" layoutY="297.0" prefHeight="200.0" prefWidth="434.0" style="-fx-background-color: #24370e;">
+              <columns>
+                <TableColumn fx:id="col_idPn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="col_nompn" prefWidth="168.7999496459961" text="Nom" />
+                  <TableColumn fx:id="col_qtpn" prefWidth="190.4000244140625" text="Quantite" />
+              </columns>
+            </TableView>
+            <Button fx:id="btntotal" layoutX="300.0" layoutY="106.0" mnemonicParsing="false" onAction="#Update_Quantity_Product_Order_Line" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #24370e;" text="Afficher Total" textFill="WHITE" />
+            <TableView fx:id="tabtotal" layoutX="539.0" layoutY="108.0" prefHeight="81.0" prefWidth="77.0" style="-fx-background-color: #24370e;">
+              <columns>
+                <TableColumn fx:id="coltotal" prefWidth="75.0" text="Total" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnquitterpn" layoutX="646.0" layoutY="518.0" mnemonicParsing="false" onAction="#Quitterpanier" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #24370e;" text="Quitter" textFill="WHITE" />
+            <Button fx:id="btnasuppqtpn" layoutX="300.0" layoutY="156.0" mnemonicParsing="false" onAction="#SuppqtPanier" prefHeight="34.0" prefWidth="190.0" style="-fx-background-color: #24370e;" text="Supprimer unité Quantite" textFill="WHITE" />
+            <Button fx:id="actualisePn" layoutX="525.0" layoutY="517.0" mnemonicParsing="false" onAction="#refreshPn" prefHeight="34.0" prefWidth="105.0" style="-fx-background-color: #24370e;" text="Actualiser" textFill="WHITE" />
+            <Button fx:id="suppPn" layoutX="498.0" layoutY="334.0" mnemonicParsing="false" onAction="#btn_SupprPn" prefHeight="34.0" prefWidth="174.0" style="-fx-background-color: #24370e;" text="Supprimer du panier" textFill="WHITE" />
+            <Button layoutX="498.0" layoutY="388.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="174.0" style="-fx-background-color: #24370e;" text="Commander" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="47.0" layoutY="111.0" prefHeight="18.0" prefWidth="87.0" text="Quantité">
+         <font>
+            <Font name="Britannic Bold" size="18.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

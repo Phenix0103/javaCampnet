@@ -6,6 +6,7 @@
 package entities;
 
 import java.sql.Date;
+import entities.evenement;
 
 /**
  *
