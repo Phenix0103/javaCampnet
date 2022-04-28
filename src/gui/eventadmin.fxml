@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EventaddController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="557.0" prefWidth="811.0" style="-fx-background-color: F9E4B7;">
+               <children>
+                  <Button fx:id="simage" layoutX="318.0" layoutY="203.0" mnemonicParsing="false" onAction="#simage" text="Select Image" />
+                  <TableView fx:id="table" layoutX="414.0" layoutY="94.0" prefHeight="415.0" prefWidth="369.0">
+                     <columns>
+                        <TableColumn fx:id="idevent" prefWidth="38.0" text="ID" visible="false" />
+                        <TableColumn fx:id="nom" prefWidth="47.20001220703125" text="Nom" />
+                        <TableColumn fx:id="photo" minWidth="0.0" prefWidth="62.0" text="photo" />
+                        <TableColumn fx:id="description" prefWidth="111.0" text="description" />
+                        <TableColumn fx:id="lieu" prefWidth="52.0" text="lieu" />
+                        <TableColumn fx:id="prix" prefWidth="94.0" text="prix" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="supprimerevent" alignment="CENTER_RIGHT" layoutX="671.0" layoutY="511.0" mnemonicParsing="false" onAction="#supprimerevent" prefHeight="32.0" prefWidth="101.0" text="Supprimer" />
+                  <Text layoutX="118.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestion des evenements" wrappingWidth="321.13671875">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="ajouterevent" alignment="CENTER_RIGHT" layoutX="301.0" layoutY="510.0" mnemonicParsing="false" onAction="#AjoutEvenement" prefHeight="33.0" prefWidth="101.0" text="Ajouter" />
+                  <TextField fx:id="tfid" layoutX="34.0" layoutY="94.0" prefHeight="32.0" prefWidth="369.0" promptText="id" visible="false" />
+                  <TextField fx:id="recherche" layoutX="414.0" layoutY="37.0" promptText="rechercher" />
+                  <ChoiceBox fx:id="choice" layoutX="571.0" layoutY="37.0" prefWidth="150.0" />
+                  <ImageView fx:id="tfphoto" blendMode="ADD" fitHeight="105.0" fitWidth="116.0" layoutX="63.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <ImageInput>
+                           <source>
+                              <Image url="file:/C:/Users/POSTE%20HP/Desktop/esprit/PI/piii/mmmmm.PNG" />
+                           </source>
+                        </ImageInput>
+                     </effect>
+                  </ImageView>
+                  <TextArea fx:id="tfdescription" layoutX="14.0" layoutY="249.0" prefHeight="105.0" prefWidth="391.0" promptText="Description" />
+                  <TextField fx:id="tfnom" layoutX="14.0" layoutY="94.0" prefHeight="32.0" prefWidth="369.0" promptText="Nom" />
+                  <TextField fx:id="tflieu" layoutX="14.0" layoutY="370.0" prefHeight="33.0" prefWidth="369.0" promptText="Lieu" />
+                  <TextField fx:id="tfprix" layoutX="15.0" layoutY="425.0" prefHeight="33.0" prefWidth="369.0" promptText="prix" />
+                  <Button fx:id="modifier" layoutX="500.0" layoutY="515.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="modifier" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

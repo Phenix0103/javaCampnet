@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="gui.ReseruController">
+   <children>
+      <TableView fx:id="eventTable" layoutX="10.0" layoutY="10.0" onMouseClicked="#fillevent" prefHeight="328.0" prefWidth="958.0">
+         <columns>
+            <TableColumn fx:id="NomColonne" prefWidth="178.0" text="Nom event" />
+            <TableColumn fx:id="tfnbr" prefWidth="143.0" text="nbr_pers" />
+            <TableColumn fx:id="tfdate" prefWidth="232.0" text="date aller" />
+            <TableColumn fx:id="tfdater" prefWidth="187.0" text="date retour" />
+            <TableColumn fx:id="DateColonnne" prefWidth="216.0" text="date" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

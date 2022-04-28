@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ReservationController">
+   <children>
+      <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="20.0" layoutY="20.0" prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="600.0">
+                     <children>
+                        <AnchorPane id="AnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="557.0" prefWidth="493.0" style="-fx-background-color: F9E4B7;">
+                           <children>
+                              <Text layoutX="118.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Réservation" wrappingWidth="321.13671875">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Text>
+                              <TextField fx:id="tfid" layoutX="34.0" layoutY="94.0" prefHeight="32.0" prefWidth="369.0" promptText="id" visible="false" />
+                              <TextField fx:id="tfnbr" layoutX="14.0" layoutY="94.0" prefHeight="32.0" prefWidth="369.0" promptText="nombre de personnes" />
+                              <DatePicker fx:id="tfdate" layoutX="15.0" layoutY="213.0" prefHeight="25.0" prefWidth="369.0" promptText="date aller" />
+                              <DatePicker fx:id="tfdater" layoutX="14.0" layoutY="275.0" prefHeight="25.0" prefWidth="377.0" promptText="date retour" />
+                              <ChoiceBox fx:id="tfevenementid" layoutX="18.0" layoutY="334.0" prefHeight="25.0" prefWidth="377.0" />
+                              <Button fx:id="reserverevent" layoutX="291.0" layoutY="408.0" mnemonicParsing="false" onAction="#reserverevent" text="je réserve cet événement" />
+                              <Button fx:id="reserus" layoutX="279.0" layoutY="459.0" mnemonicParsing="false" text="Mes Réservations" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
